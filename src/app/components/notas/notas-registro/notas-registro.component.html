@@ -1,0 +1,53 @@
+<div class="div_contenedor">
+    <div class="div_centrado">
+        <mat-card class="example-card">
+            <div style="text-align:center;">
+                <mat-card-header>
+                    <div class="clsCenter">
+                        <mat-card-title style="margin-left:35px">Registrar Notas</mat-card-title>
+                        <br>
+                    </div>
+                </mat-card-header>
+            </div>
+
+            <mat-card-content>
+
+                <div class="example-container clsCenter">
+                    <mat-form-field class="selectMat selectResp" appearance="fill">
+                        <mat-label>Alumno</mat-label>
+                        <mat-select [formControl]="fAlumno">
+                            <mat-option *ngFor="let opc of lAlumnos" [value]="opc.IdAlumno">
+                                {{opc.sNombres}} {{opc.sApellidos}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="example-container clsCenter">
+                    <mat-form-field class="selectMat selectResp" appearance="fill">
+                        <mat-label>Curso</mat-label>
+                        <mat-select [formControl]="fCurso">
+                            <mat-option *ngFor="let opc of lCursos" [value]="opc.nIdCurso">
+                                {{opc.sNomCur}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="example-container clsCenter">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nota</mat-label>
+                        <input matInput placeholder="Ingrese la Nota" [formControl]="fNota">
+                    </mat-form-field>
+                </div>
+
+
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="clsCenter">
+                    <button mat-raised-button color="primary" (click)="fnRegistrar()">Registrar Nota</button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

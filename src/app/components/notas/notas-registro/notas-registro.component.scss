@@ -1,0 +1,26 @@
+.div_contenedor {
+    height: 100vh;
+}
+
+.div_centrado {
+    width      : 20rem;
+    height     : 10rem;
+    position   : absolute;
+    top        : 30%;
+    left       : 50%;
+    margin-top : -100px;
+    margin-left: -100px;
+}
+
+.example-card {
+    max-width: 400px;
+}
+
+.clsCenter {
+    text-align: center;
+}
+
+.clsLogoImg {
+    width     : 40%;
+    text-align: center;
+}

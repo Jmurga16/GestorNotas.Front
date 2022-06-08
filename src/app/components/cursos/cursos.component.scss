@@ -1,0 +1,60 @@
+table {
+    width: 100%;
+}
+
+.header-app {
+    text-align: center;
+}
+
+.filtros {
+    display        : flex;
+    flex-direction : row;
+    flex-wrap      : wrap;
+    justify-content: center;
+}
+
+.selectEstado {
+    margin-right: 1rem;
+}
+
+.example-button-row button,
+.example-button-row a {
+    margin-right: 0.5rem;
+}
+
+.botones {
+    margin-left: 1rem;
+    margin-top : 1rem;
+    float      : right;
+}
+
+.clsColumnaId {
+    width: 10%;
+}
+
+.clsColumnaNombre {
+    width: 30%;
+}
+
+.clsColumnaDescripcion {
+    width: 30%;
+}
+
+.clsColumnaObligatorio {
+    width: 15%;
+}
+
+.clsColumnaAcciones {
+    width: 15%;
+}
+
+.buttonActive {
+    background-color: forestgreen;
+    color           : white;
+}
+
+.example-container {
+    /*height: 38rem;*/
+    width   : 100%;
+    overflow: auto;
+}
