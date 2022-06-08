@@ -89,32 +89,6 @@ export class NotasConsultaComponent implements OnInit {
   //#endregion
 
 
-  //#region Abrir Modal
-  async fnAbrirModal(accion: number, nIdAluCur: number) {
-
-    /* console.log(accion)
-    console.log(nIdAluCur)
-   
-    const dialogRef = this.dialog.open(AlumnosModalComponent, {
-      width: '50rem',
-      disableClose: true,
-      data: {
-        accion: accion, 
-        nIdAlumno: nIdAluCur
-      },
-    });
-    
-    dialogRef.afterClosed().subscribe((result: any) => {
-      
-      if (result !== undefined) {
-        
-        this.fnListarAlumnos();
-      }
-    }); */
-  }
-  //#endregion Abrir Modal
-
-
   //#region Eliminar
   async fnEliminar(nIdUsuario: number) {
     let sTitulo: string, sRespuesta: string;

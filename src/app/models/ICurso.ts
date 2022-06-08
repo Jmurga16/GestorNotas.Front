@@ -14,5 +14,5 @@ export class Curso {
 
 export interface CursoData {
     accion: number;
-    nIdCurso:number;  
+    IdCurso:number;  
 }

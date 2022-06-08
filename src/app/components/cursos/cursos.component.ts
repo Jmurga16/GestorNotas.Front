@@ -78,7 +78,7 @@ export class CursosComponent implements OnInit {
 
 
   //#region Abrir Modal
-  async fnAbrirModal(accion: number, nIdCurso: number) {
+  async fnAbrirModal(accion: number, idCurso: number) {
 
     //Constante para abrir el modal
     const dialogRef = this.dialog.open(CursosModalComponent, {
@@ -86,7 +86,7 @@ export class CursosComponent implements OnInit {
       disableClose: true,
       data: {
         accion: accion, //0:Nuevo , 1:Editar
-        nIdCurso: nIdCurso
+        IdCurso: idCurso
       },
     });
     //Luego de Cerrar el modal
@@ -102,13 +102,13 @@ export class CursosComponent implements OnInit {
 
 
   //#region Eliminar
-  async fnEliminar(nIdUsuario: number) {
+  async fnCambiarEstado(idCurso: number, option: number) {
     let sTitulo: string, sRespuesta: string;
 
     //Asignar Titulo de Mensaje 
-    sTitulo = '¿Desea eliminar el Alumno?';
+    sTitulo = option == 0 ? '¿Desea eliminar el Curso?' : '¿Desea activar el Curso?';
     //Asignar Respuesta segun cambio
-    sRespuesta = 'Se eliminó el Alumno con éxito';
+    sRespuesta = option == 0 ? 'Se eliminó el Alumno con éxito' : 'Se activó el Alumno con éxito';
 
     //Mensaje de confirmacion
     var resp = await Swal.fire({
@@ -129,12 +129,13 @@ export class CursosComponent implements OnInit {
     //Definicion parametros
     let pParametro = [];
     //Identificador de Usuario
-    pParametro.push(nIdUsuario);
+    pParametro.push(idCurso);
+    pParametro.push(option);
 
     //Llamar al servicio de Alumnos para Eliminar
     this.cursosService.fnServiceCursos('05', pParametro).subscribe({
       next: (data) => {
-        if (data.mensaje == "Ok") {
+        if (data.cod == 1) {
           Swal.fire({
             title: sRespuesta,
             icon: 'success',

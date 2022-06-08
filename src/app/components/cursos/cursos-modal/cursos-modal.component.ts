@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class CursosModalComponent implements OnInit {
 
-  nIdCurso?: number;
+  IdCurso?: number;
   formGroup: FormGroup;
   sAccionModal?: string;
 
@@ -25,10 +25,11 @@ export class CursosModalComponent implements OnInit {
 
   ) {
     this.formGroup = this.fB.group({
-      nIdCurso: [0, Validators.required],
-      sCodCur: [""],
-      sNomCur: ["", Validators.required],
-      nCreditos: ["", Validators.required]
+      IdCurso: [0, Validators.required],
+      sNombre: ["", Validators.required],
+      sDescripcion: ["", Validators.required],
+      bObligatorio: [""],
+      bEstado: [1]
     });
   }
 
@@ -38,9 +39,8 @@ export class CursosModalComponent implements OnInit {
 
     //En caso ya tenga datos
     if (this.data.accion == 1) {
-      this.nIdCurso = this.data.nIdCurso;
-      this.formGroup?.controls['nIdCurso'].setValue(this.nIdCurso);
-      this.formGroup.controls['sCodCur'].disable();
+      this.IdCurso = this.data.IdCurso;
+      this.formGroup?.controls['IdCurso'].setValue(this.IdCurso);
 
       this.fnCargarDatos();
     }
@@ -65,14 +65,15 @@ export class CursosModalComponent implements OnInit {
   async fnCargarDatos() {
     let pParametro = [];
     //Parametro el Identificador del Almacen
-    pParametro.push(this.nIdCurso);
+    pParametro.push(this.IdCurso);
 
     //Llamar al servicio de Alumnos para Eliminar
     this.cursosService.fnServiceCursos('02', pParametro).subscribe(
       data => {
-        this.formGroup?.controls['sCodCur'].setValue(data[0].sCodCur);
-        this.formGroup?.controls['sNomCur'].setValue(data[0].sNomCur);
-        this.formGroup?.controls['nCreditos'].setValue(data[0].nCreditos);
+   
+        this.formGroup?.controls['sNombre'].setValue(data[0].sNombre);
+        this.formGroup?.controls['sDescripcion'].setValue(data[0].sDescripcion);
+        this.formGroup?.controls['bObligatorio'].setValue(data[0].bObligatorio);
 
       });
 
@@ -98,14 +99,18 @@ export class CursosModalComponent implements OnInit {
       let pOpcion = this.data.accion == 0 ? '03' : '04'; // 03-> Insertar / 04-> Editar
 
       //Llenar formulario      
-      pParametro.push(this.formGroup?.controls['sNomCur'].value);
-      pParametro.push(this.formGroup?.controls['nCreditos'].value);
-      pParametro.push(this.nIdCurso);
+      pParametro.push(this.formGroup?.controls['sNombre'].value);
+      pParametro.push(this.formGroup?.controls['sDescripcion'].value);
+      pParametro.push(this.formGroup?.controls['bObligatorio'].value);
+      pParametro.push(this.formGroup?.controls['bEstado'].value);
+
+      pParametro.push(this.IdCurso);
 
       //Llamar al servicio de Alumnos para Guardar o Editar
       this.cursosService.fnServiceCursos(pOpcion, pParametro).subscribe({
         next: (value) => {
           //Si es válido, retornar mensaje de exito
+
           if (value.cod == 1) {
             Swal.fire({
               title: `Se registró con éxito`,

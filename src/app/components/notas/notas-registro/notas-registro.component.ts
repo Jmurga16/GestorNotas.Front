@@ -164,8 +164,9 @@ export class NotasRegistroComponent implements OnInit {
     let pParametro: any = [];
     this.alumnosService.fnServiceAlumnos('01', pParametro).subscribe(
       data => {
-        console.log(data)
-        this.lAlumnos = data
+
+        this.lAlumnos = data.filter((element: { bEstado: boolean; }) => element.bEstado)
+
       });
   }
   //#endregion 
@@ -176,7 +177,9 @@ export class NotasRegistroComponent implements OnInit {
     let pParametro: any = [];
     this.cursosService.fnServiceCursos('01', pParametro).subscribe(
       data => {
-        this.lCursos = data
+
+        this.lCursos = data.filter((element: { bEstado: boolean; }) => element.bEstado)
+
       });
   }
   //#endregion 
@@ -189,7 +192,6 @@ export class NotasRegistroComponent implements OnInit {
     pParametro.push(this.formGroup?.controls['IdCurso'].value);
     this.notasService.fnServiceNotas('02', pParametro).subscribe(
       data => {
-        console.log(data)
         this.dataForm = data
         if (data.length > 0) {
           this.formGroup?.controls['nPractica1'].setValue(data[0].nPractica1);

@@ -5,47 +5,31 @@
     <form [formGroup]="formGroup" ngNativeValidate autocomplete="off" name="Formulario" id="new-form">
         <!--Formulario: Codigo-->
 
-        <div class="row" style="padding-bottom: 1rem;" *ngIf="data.accion!=0">
-            <div class="col-md-12">
-                <mat-form-field style="display:initial">
-                    <mat-label>Codigo</mat-label>
-                    <input matInput type="text" formControlName="sCodCur" autocomplete="off" name="Código">
-                </mat-form-field>
-            </div>
-        </div>
 
-
-        <div class="row" *ngIf="data.accion!=0">
-            <!--Formulario: Zona-->
-            <div class="col-md-6">
-                <mat-form-field style="display:initial">
-                    <mat-label>Nombre del Curso</mat-label>
-                    <input matInput type="text" formControlName="sNomCur" autocomplete="nope" name="Nombre">
-                </mat-form-field>
-            </div>
-            <!--Formulario: Supervisor-->
-            <div class="col-md-6">
-                <mat-form-field style="display:initial">
-                    <mat-label>Creditos</mat-label>
-                    <input matInput type="number" formControlName="nCreditos" autocomplete="nope" name="Creditos">
-                </mat-form-field>
-            </div>
-
-        </div>
-
-        <div *ngIf="data.accion==0">
+        <div>
             <!--Formulario: Zona-->
             <div class="col-md-12">
                 <mat-form-field style="display:initial">
                     <mat-label>Nombre del Curso</mat-label>
-                    <input matInput type="text" formControlName="sNomCur" autocomplete="nope" name="Nombre">
+                    <input matInput type="text" formControlName="sNombre" autocomplete="nope" name="Nombre">
                 </mat-form-field>
             </div>
             <!--Formulario: Supervisor-->
             <div class="col-md-12">
                 <mat-form-field style="display:initial">
-                    <mat-label>Creditos</mat-label>
-                    <input matInput type="number" formControlName="nCreditos" autocomplete="nope" name="Creditos">
+                    <mat-label>Descripción</mat-label>
+                    <input matInput type="text" formControlName="sDescripcion" autocomplete="nope"
+                        name="sDescripcion">
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-12">
+                <mat-form-field style="display:initial">
+                    <mat-label>Obligatorio</mat-label>
+                    <mat-select formControlName="bObligatorio">
+                        <mat-option [value]="true"> SI </mat-option>
+                        <mat-option [value]="false"> NO </mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
 
