@@ -25,10 +25,15 @@ export class NotasConsultaComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = [
 
-    'sCodAlu',
-    'sNombres',
-    'sNomCur',
-    'nNota'
+    'sNombreAlumno',
+    'sNombreCurso',
+    'nPractica1',
+    'nPractica2',
+    'nPractica3',
+    'nParcial',
+    'nFinal',
+    'nPromedioFinal',
+
   ];
 
   @ViewChild(MatPaginator)
@@ -48,10 +53,136 @@ export class NotasConsultaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
 
+
+  //#region Consultar
   fnConsultar() {
 
+    let pParametro: any = [];
+    pParametro.push(this.fCodigo.value)
+
+    this.notasService.fnServiceNotas('01', pParametro).subscribe(
+      data => {
+
+        this.listaNotas = data;
+        if (this.listaNotas.length > 0) {
+          this.dataSource = new MatTableDataSource(this.listaNotas);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+
+          this.fnPromediar();
+        }
+        else {
+          Swal.fire({
+            title: 'Advertencia',
+            text: 'El codigo del Alumno no existe o está anulado',
+            icon: 'warning'
+          })
+        }
+
+      });
+
   }
+  //#endregion
+
+
+  //#region Abrir Modal
+  async fnAbrirModal(accion: number, nIdAluCur: number) {
+
+    /* console.log(accion)
+    console.log(nIdAluCur)
+   
+    const dialogRef = this.dialog.open(AlumnosModalComponent, {
+      width: '50rem',
+      disableClose: true,
+      data: {
+        accion: accion, 
+        nIdAlumno: nIdAluCur
+      },
+    });
+    
+    dialogRef.afterClosed().subscribe((result: any) => {
+      
+      if (result !== undefined) {
+        
+        this.fnListarAlumnos();
+      }
+    }); */
+  }
+  //#endregion Abrir Modal
+
+
+  //#region Eliminar
+  async fnEliminar(nIdUsuario: number) {
+    let sTitulo: string, sRespuesta: string;
+
+    //Asignar Titulo de Mensaje 
+    sTitulo = '¿Desea eliminar la Nota del Alumno?';
+    //Asignar Respuesta segun cambio
+    sRespuesta = 'Se eliminó la Nota con éxito';
+
+    //Mensaje de confirmacion
+    var resp = await Swal.fire({
+      title: sTitulo,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    })
+
+    //Si se responde no
+    if (!resp.isConfirmed) {
+      return;
+    }
+
+    //Definicion parametros
+    let pParametro = [];
+    //Identificador de Usuario
+    pParametro.push(nIdUsuario);
+
+    //Llamar al servicio de Alumnos para Eliminar
+    this.notasService.fnServiceNotas('05', pParametro).subscribe({
+      next: (data) => {
+        if (data.mensaje == "Ok") {
+          Swal.fire({
+            title: sRespuesta,
+            icon: 'success',
+            timer: 4500
+          })
+        }
+        //Se lista nuevamente los almacenes
+        this.fnConsultar();
+      },
+      error: (e) => console.error(e),
+      //complete: () => console.info('complete')
+    });
+  }
+  //#endregion Eliminar
+
+
+  //#region Promediar
+  fnPromediar() {
+    //Multiplicacion Nota * credito / sumaCreditos
+
+    let sumaNotas: number = 0
+    let cantidadNotas = this.listaNotas.length
+    if (this.listaNotas.length > 0) {
+      for (let i = 0; i < this.listaNotas.length; i++) {
+        sumaNotas = sumaNotas + this.listaNotas[i].nPromedioFinal
+      }
+      this.promedio = parseFloat((sumaNotas / cantidadNotas).toFixed(2));
+    }
+    else {
+      this.promedio = 0
+    }
+
+  }
+  //#endregion
+
+
 }

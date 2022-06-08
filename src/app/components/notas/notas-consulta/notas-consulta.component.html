@@ -5,6 +5,7 @@
     <div class="text-center">
         <div class="row">
             <div class="col-md-4"></div>
+
             <mat-form-field class="example-form-field col-md-3">
                 <mat-label>Ingrese Codigo</mat-label>
                 <input matInput type="text" [formControl]="fCodigo">
@@ -12,6 +13,7 @@
                     <mat-icon>close</mat-icon>
                 </button>
             </mat-form-field>
+
             <div class="col-md-1">
                 <button mat-raised-button (click)="fnConsultar()" color="primary">Consultar</button>
 
@@ -21,7 +23,92 @@
     </div>
 
 
-    
+    <div class="example-container mat-elevation-z8 " *ngIf="listaNotas.length>0" class="table table-striped mt-3">
+        <table mat-table [dataSource]="dataSource" matSort style="width: 100%;" aria-describedby="TablaUsuario">
+
+            <!-- Alumno -->
+            <ng-container matColumnDef="sNombreAlumno">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="clsColumnaNombre" id="Nombre"> Alumno </th>
+                <td mat-cell *matCellDef="let element"> {{element.sNombreAlumno}} </td>
+            </ng-container>
+
+            <!-- Curso -->
+            <ng-container matColumnDef="sNombreCurso">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="clsColumnaApellidos" id="Nombre de Curso">
+                    Curso </th>
+                <td mat-cell *matCellDef="let element"> {{element.sNombreCurso}} </td>
+            </ng-container>
+
+            <!-- Nota Practica 1 -->
+            <ng-container matColumnDef="nPractica1">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="clsColumnaPractica" id="Practica1">
+                    Practica 1 </th>
+                <td mat-cell *matCellDef="let element"> {{element.nPractica1}} </td>
+            </ng-container>
+
+            <!-- Nota Practica 1 -->
+            <ng-container matColumnDef="nPractica2">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="clsColumnaPractica" id="Practica2">
+                    Practica 2 </th>
+                <td mat-cell *matCellDef="let element"> {{element.nPractica2}} </td>
+            </ng-container>
+
+            <!-- Nota Practica 3 -->
+            <ng-container matColumnDef="nPractica3">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="clsColumnaPractica" id="Practica3">
+                    Practica 3 </th>
+                <td mat-cell *matCellDef="let element"> {{element.nPractica3}} </td>
+            </ng-container>
+
+            <!-- Nota Practica 1 -->
+            <ng-container matColumnDef="nParcial">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="clsColumnaApellidos" id="Parcial">
+                    Parcial </th>
+                <td mat-cell *matCellDef="let element"> {{element.nParcial}} </td>
+            </ng-container>
+
+            <!-- Nota Practica 1 -->
+            <ng-container matColumnDef="nFinal">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="clsColumnaApellidos" id="Final">
+                    Final </th>
+                <td mat-cell *matCellDef="let element"> {{element.nFinal}} </td>
+            </ng-container>
+
+            <!-- Nota Practica 1 -->
+            <ng-container matColumnDef="nPromedioFinal">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="clsColumnaApellidos" id="PromedioFinal">
+                    Promedio Curso </th>
+                <td mat-cell *matCellDef="let element"> {{element.nPromedioFinal}} </td>
+            </ng-container>
+            <!--Acciones-->
+            <ng-container matColumnDef="Acciones">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="clsColumnaAcciones" id="Accion"> Acciones
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <div class="example-button-row ">
+                        <button mat-raised-button color="accent" style="margin-right: 8px;"
+                            (click)="fnAbrirModal(1,element.nIdAlumno)">Editar</button>
+                        <button mat-raised-button color="warn" (click)="fnEliminar(element.nIdAlumno)">Eliminar</button>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <!--Mat Paginator-->
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+    </div>
+
+    <div *ngIf="listaNotas.length>0">
+        <div *ngIf="promedio>=11" style="font-size: 1.2rem;">
+            <strong> Promedio = <strong style="color: green;">{{promedio}}</strong></strong>
+        </div>
+        <div *ngIf="11>promedio" style="font-size: 1.2rem;">
+            <strong> Promedio = <strong style="color: red;">{{promedio}}</strong></strong>
+        </div>
+    </div>
+
 
 
 </div>

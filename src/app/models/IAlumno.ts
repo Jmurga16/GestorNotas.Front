@@ -1,13 +1,18 @@
 export class Alumno {
-    IdAlumno?: number;
+    idAlumno?: number;
     sCodAlu: string;
-    sNombres: string;
-    sApellidos: string;
+    sNombrePri: string;
+    sNombreSec: string;
+    sApellidoPaterno: string;
+    sApellidoMaterno: string;
 
-    constructor(sCodAlu: string, sNombres: string, sApellidos: string) {
+    constructor(sCodAlu: string, sNombrePri: string, sNombreSec: string, sApellidoPaterno: string, sApellidoMaterno: string) {
         this.sCodAlu = sCodAlu
-        this.sNombres = sNombres
-        this.sApellidos = sApellidos
+        this.sNombrePri = sNombrePri
+        this.sNombreSec = sNombreSec
+        this.sApellidoPaterno = sApellidoPaterno
+        this.sApellidoMaterno = sApellidoPaterno
+
     }
 }
 

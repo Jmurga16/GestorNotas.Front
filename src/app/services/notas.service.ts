@@ -13,7 +13,7 @@ export class NotasService {
   constructor(private http: HttpClient) { }
 
   fnServiceNotas(sOpcion: string, pParametro: any): Observable<any> {
-    const urlEndPoint = this.url + 'CursoService';
+    const urlEndPoint = this.url + 'NotaService';
     const httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     const params = {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Curso } from 'src/app/models/ICurso';
 import { AlumnosService } from 'src/app/services/alumnos.service';
 import { NotasService } from 'src/app/services/notas.service';
@@ -18,18 +18,28 @@ export class NotasRegistroComponent implements OnInit {
   lAlumnos?: Alumno[]
   lCursos?: Curso[]
 
-  fAlumno = new FormControl();
-  fCurso = new FormControl();
-  fNota = new FormControl();
+  formGroup: FormGroup;
+  dataForm: any = []
 
   constructor(
     private alumnosService: AlumnosService,
     private cursosService: CursosService,
-    private notasService: NotasService
+    private notasService: NotasService,
+    private fB: FormBuilder,
   ) {
-    this.fAlumno = new FormControl();
-    this.fCurso = new FormControl();
-    this.fNota = new FormControl();
+
+    this.formGroup = this.fB.group({
+      IdAlumno: ["", Validators.required],
+      IdCurso: ["", Validators.required],
+      nPractica1: ["", Validators.required],
+      nPractica2: ["", Validators.required],
+      nPractica3: ["", Validators.required],
+      nParcial: ["", Validators.required],
+      nFinal: ["", Validators.required],
+      nPromedioFinal: ["", Validators.required],
+
+    });
+
   }
 
   ngOnInit(): void {
@@ -42,20 +52,25 @@ export class NotasRegistroComponent implements OnInit {
   //#region Registrar Notas
   fnRegistrar() {
 
-    let nIdAlumno = this.fAlumno.value
-    let nIdCurso = this.fCurso.value
-    let nNota = this.fNota.value
-
     if (this.fnValidar()) {
       let pParametro = [];
-      //Llenar formulario        
-      pParametro.push(nIdAlumno);
-      pParametro.push(nIdCurso);
-      pParametro.push(nNota);
+      let sOpcion: string = "03"
+      //Llenar formulario   
+      pParametro.push(this.formGroup?.controls['IdAlumno'].value);
+      pParametro.push(this.formGroup?.controls['IdCurso'].value);
+      pParametro.push(this.formGroup?.controls['nPractica1'].value);
+      pParametro.push(this.formGroup?.controls['nPractica2'].value);
+      pParametro.push(this.formGroup?.controls['nPractica3'].value);
+      pParametro.push(this.formGroup?.controls['nParcial'].value);
+      pParametro.push(this.formGroup?.controls['nFinal'].value);
+      pParametro.push(this.formGroup?.controls['nPromedioFinal'].value);
 
+      if (this.dataForm.length > 0) {
+        sOpcion = "04"
+      }
 
       //Llamar al servicio de Alumnos para Guardar
-      this.notasService.fnServiceNotas('03', pParametro).subscribe({
+      this.notasService.fnServiceNotas(sOpcion, pParametro).subscribe({
         next: (data) => {
 
           //Si es válido, retornar mensaje de exito
@@ -65,18 +80,13 @@ export class NotasRegistroComponent implements OnInit {
               icon: 'success',
               timer: 3500
             }).then(() => {
-              this.fAlumno.setValue("");
-              this.fCurso.setValue("");
-              this.fNota.setValue("");
+              this.fnLimpiarCampos();
             });
           }
         },
         error: (e) => console.error(e),
-        //complete: () => console.info('complete')
+        complete: () => this.dataForm = []
       });
-    }
-    else {
-
     }
 
   }
@@ -86,9 +96,14 @@ export class NotasRegistroComponent implements OnInit {
   //#region  Validaciones
   fnValidar(): boolean {
 
-    let nIdAlumno = this.fAlumno.value
-    let nIdCurso = this.fCurso.value
-    let nNota = this.fNota.value
+    let nIdAlumno = this.formGroup?.controls['IdAlumno'].value
+    let nIdCurso = this.formGroup?.controls['IdCurso'].value
+
+    let nPractica1 = this.formGroup?.controls['nPractica1'].value
+    let nPractica2 = this.formGroup?.controls['nPractica2'].value
+    let nPractica3 = this.formGroup?.controls['nPractica3'].value
+    let nParcial = this.formGroup?.controls['nParcial'].value
+    let nFinal = this.formGroup?.controls['nFinal'].value
 
     if (nIdAlumno == null || nIdAlumno == 0) {
       Swal.fire({
@@ -106,23 +121,36 @@ export class NotasRegistroComponent implements OnInit {
       })
       return false
     }
-    else if (nIdCurso == null || nNota == undefined || nNota == '') {
+    else if (nPractica1 == '' || nPractica2 == '' || nPractica3 == '' || nParcial == '' || nFinal == '') {
       Swal.fire({
-        title: `Digitar una Nota`,
+        title: `Digitar todas las Notas`,
         icon: 'warning',
         timer: 3500
       })
       return false
     }
-    else if (nIdCurso < 0 || nNota > 20) {
+    else if (
+      nPractica1 < 0 || nPractica1 > 20 ||
+      nPractica2 < 0 || nPractica2 > 20 ||
+      nPractica3 < 0 || nPractica3 > 20 ||
+      nParcial < 0 || nParcial > 20 ||
+      nFinal < 0 || nFinal > 20) {
       Swal.fire({
-        title: `La nota debe estar entre 0 y 20`,
+        title: `Las notas deben estar entre 0 y 20`,
         icon: 'warning',
         timer: 3500
       })
       return false
     }
     else {
+      let nPromedioFinal;
+
+      nPromedioFinal = ((nPractica1 + nPractica2 + nPractica3) / 3 + nParcial + (nFinal * 2)) / 4
+
+      nPromedioFinal = parseFloat(nPromedioFinal.toFixed(2))
+
+      this.formGroup?.controls['nPromedioFinal'].setValue(nPromedioFinal);
+
       return true;
     }
 
@@ -136,6 +164,7 @@ export class NotasRegistroComponent implements OnInit {
     let pParametro: any = [];
     this.alumnosService.fnServiceAlumnos('01', pParametro).subscribe(
       data => {
+        console.log(data)
         this.lAlumnos = data
       });
   }
@@ -152,5 +181,49 @@ export class NotasRegistroComponent implements OnInit {
   }
   //#endregion 
 
+
+  //#region Listar Notas Existentes
+  fnListarNotas() {
+    let pParametro: any = [];
+    pParametro.push(this.formGroup?.controls['IdAlumno'].value);
+    pParametro.push(this.formGroup?.controls['IdCurso'].value);
+    this.notasService.fnServiceNotas('02', pParametro).subscribe(
+      data => {
+        console.log(data)
+        this.dataForm = data
+        if (data.length > 0) {
+          this.formGroup?.controls['nPractica1'].setValue(data[0].nPractica1);
+          this.formGroup?.controls['nPractica2'].setValue(data[0].nPractica2);
+          this.formGroup?.controls['nPractica3'].setValue(data[0].nPractica3);
+          this.formGroup?.controls['nParcial'].setValue(data[0].nParcial);
+          this.formGroup?.controls['nFinal'].setValue(data[0].nFinal);
+          this.formGroup?.controls['nPromedioFinal'].setValue(data[0].nPromedioFinal);
+        }
+        else {
+          this.dataForm = []
+        }
+
+      });
+  }
+  //#endregion 
+
+
+  //#region Limpiar Campos
+  fnLimpiarCampos() {
+
+    this.formGroup.reset({
+      'IdAlumno': '',
+      'IdCurso': '',
+      'nPractica1': 0,
+      'nPractica2': 0,
+      'nPractica3': 0,
+      'nParcial': 0,
+      'nFinal': 0,
+      'nPromedioFinal': 0
+    });
+
+    this.formGroup.clearValidators()
+  }
+  //#endregion
 
 }

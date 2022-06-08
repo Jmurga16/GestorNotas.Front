@@ -27,4 +27,6 @@ export interface Notas {
     sApellidos: string,
     nNota: number,
     nCreditos: number,
+    nPromedioFinal: number,
+
 }

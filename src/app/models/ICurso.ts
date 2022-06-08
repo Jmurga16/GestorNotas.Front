@@ -1,12 +1,12 @@
 export class Curso {
-    nIdCurso?: number;
+    idCurso?: number;
     sCodCur: string;
-    sNomCur: string;
+    sNombre: string;
     nCreditos: number;
     
-    constructor( sCodCur: string, sNomCur: string, nCreditos: number) {
+    constructor( sCodCur: string, sNombre: string, nCreditos: number) {
         this.sCodCur = sCodCur
-        this.sNomCur = sNomCur
+        this.sNombre = sNombre
         this.nCreditos = nCreditos        
     }
 }
