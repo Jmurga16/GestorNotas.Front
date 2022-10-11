@@ -1,27 +1,62 @@
-# AppExamen
+# GestorNotas.Front
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.16.
+1. Haber Compilado el Back-End (https://github.com/Jmurga16/GestorNotas.Back)
+2. Clonar en Visual Studio Code.
+3. Abrir consola del visual studio.
+4. Ejecutar el comando "npm i" o "npm i --legacy-peer-deps" (si tiene otra versión de node).
+5. Ejecutar el comando "ng serve"
+6. Abrir la pagina http://localhost:4200/
 
-## Development server
+Proyecto generado en Angular CLI version 13.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Pantallas
 
-## Code scaffolding
+Listado de Alumnos:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![1](https://user-images.githubusercontent.com/58633633/195157285-0ada9fee-735a-4c28-806a-479f95b05eeb.png)
 
-## Build
+Crear/Editar Alumnos:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+![2](https://user-images.githubusercontent.com/58633633/195157300-ca338334-543f-47f1-8087-0cc157574658.png)
 
-## Running unit tests
+Eliminar Alumnos:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+![3](https://user-images.githubusercontent.com/58633633/195157311-e841ef84-9a40-48a5-81b5-77d46fbb7161.png)
 
-## Running end-to-end tests
+Listado de Cursos:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![4](https://user-images.githubusercontent.com/58633633/195157332-df551a67-2b30-4242-9307-74d689fe9277.png)
 
-## Further help
+Registro de Notas:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Proyecto generado en Angular CLI version 13.
+
+Pantallas
+
+Listado de Alumnos:
+
+![1](https://user-images.githubusercontent.com/58633633/195157285-0ada9fee-735a-4c28-806a-479f95b05eeb.png)
+
+Crear/Editar Alumnos:
+
+![2](https://user-images.githubusercontent.com/58633633/195157300-ca338334-543f-47f1-8087-0cc157574658.png)
+
+Eliminar Alumnos:
+
+![3](https://user-images.githubusercontent.com/58633633/195157311-e841ef84-9a40-48a5-81b5-77d46fbb7161.png)
+
+Listado de Cursos:
+
+![4](https://user-images.githubusercontent.com/58633633/195157332-df551a67-2b30-4242-9307-74d689fe9277.png)
+
+Registro de Notas:
+
+![5](https://user-images.githubusercontent.com/58633633/195157338-2cc5fe73-3ee6-4f3a-bc47-200bb0e3c973.png)
+
+Consulta de Notas por Código de Alumno:
+
+![6](https://user-images.githubusercontent.com/58633633/195157347-4a430cde-5986-472b-8984-0e6d1af2547a.png)
+
+Consulta de Notas por Código de Alumno:
+
+![6](https://user-images.githubusercontent.com/58633633/195157347-4a430cde-5986-472b-8984-0e6d1af2547a.png)
