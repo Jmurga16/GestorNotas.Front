@@ -17,7 +17,7 @@ Listado de Alumnos:
 
 Crear/Editar Alumnos:
 
-![2](https://user-images.githubusercontent.com/58633633/195157300-ca338334-543f-47f1-8087-0cc157574658.png)
+![image](https://user-images.githubusercontent.com/58633633/195202325-202f6da5-33ce-48f7-acbc-ee717a94ede7.png)
 
 Eliminar Alumnos:
 
@@ -26,6 +26,10 @@ Eliminar Alumnos:
 Listado de Cursos:
 
 ![4](https://user-images.githubusercontent.com/58633633/195157332-df551a67-2b30-4242-9307-74d689fe9277.png)
+
+Registro de Cursos:
+
+![image](https://user-images.githubusercontent.com/58633633/195202377-979ded35-1bfa-4e9b-8a6e-a172f505ff89.png)
 
 Registro de Notas:
 
