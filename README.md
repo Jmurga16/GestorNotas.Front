@@ -13,7 +13,8 @@ Pantallas
 
 Listado de Alumnos:
 
-![1](https://user-images.githubusercontent.com/58633633/195157285-0ada9fee-735a-4c28-806a-479f95b05eeb.png)
+![image](https://user-images.githubusercontent.com/58633633/195202470-f0c9c979-e05b-4cdf-99ae-ca9af0864530.png)
+
 
 Crear/Editar Alumnos:
 
@@ -25,7 +26,7 @@ Eliminar Alumnos:
 
 Listado de Cursos:
 
-![4](https://user-images.githubusercontent.com/58633633/195157332-df551a67-2b30-4242-9307-74d689fe9277.png)
+![image](https://user-images.githubusercontent.com/58633633/195202526-158d3d85-d53f-4fac-84c4-36c4fb670b72.png)
 
 Registro de Cursos:
 
@@ -37,6 +38,5 @@ Registro de Notas:
 
 Consulta de Notas por Código de Alumno:
 
-![6](https://user-images.githubusercontent.com/58633633/195157347-4a430cde-5986-472b-8984-0e6d1af2547a.png)
-
+![image](https://user-images.githubusercontent.com/58633633/195202632-0530926d-f1b9-410f-97cc-653728ecd725.png)
 
